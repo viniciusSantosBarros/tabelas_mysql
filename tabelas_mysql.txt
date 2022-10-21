@@ -1,0 +1,323 @@
+/*Tabela medicos:
+
+create table medicos(
+id_medico int not null auto_increment,
+nome varchar(90),
+nascimento date,
+CRM int,
+contato int,
+endereço varchar(90),
+categoria varchar(90),
+primary key(id_medico)
+);
+
+select * from medicos;
+
+insert into medicos (id_medico, nome, nascimento, CRM, contato, endereço, categoria)
+values (1, 'alessandro Ramos', '1998-01-03', 132, 77791451 , 'rua Cipreste', 'pediatria');
+
+insert into medicos (id_medico, nome, nascimento, CRM, contato, endereço, categoria)
+values (2, 'Bruno Bezerra', '1978-07-03', 141, 44513178, 'rua Salvador', 'gastroenterologia');
+
+insert into medicos (id_medico, nome, nascimento, CRM, contato, endereço, categoria)
+values (default, 'Carlos Campos', '2003-01-02', 771, 91869041, 'Rua Aquino', 'clinica geral');
+
+insert into medicos (id_medico, nome, nascimento, CRM, contato, endereço, categoria)
+values (default, 'Daniel Medrado', '1991-12-12', 192, 44916413, 'Rua Araguá', 'dermatologia'),
+	   (default, 'Elson Julio', '1981-05-01', 169, 41398172, 'Rua Portugual', 'clinica geral'),
+	   (default, 'felipe Braga', '2003-04-23', 185, 77711549, 'Rua Itajai', 'gastroenterologia'),
+       (default, 'Gustavo Guimaraes', '1999-04-04', 961, 98776159, 'Rua Guarujá', 'clinica geral'),
+       (default, 'Igor Pereira', '2001-08-06', 779, 77123981, 'Rua Guaporé', 'dermatologia'),
+       (default, 'Joice Roseli', '1971-03-02', 197, 88911560, 'Rua Olambra', 'gastroenterologia'),
+       (default, 'karen Isis', '2000-04-22', 715, 99142981, 'Rua Curupaiti', 'dermatologia');
+       
+select * from medicos;
+
+Parte 2 - Crie uma coluna “em atividade” para os médicos, indicando se ele ainda está atuando no hospital ou não.
+Crie script para atualizar ao menos dois médicos como inativos e os demais em atividade.
+       
+alter table medicos add column em_atividade varchar(45) after categoria;
+       
+      update medicos set em_atividade = 'ativo' where id_medico = 1;
+      update medicos set em_atividade = 'ativo' where id_medico = 2;
+      update medicos set em_atividade = 'ativo' where id_medico = 3;
+      update medicos set em_atividade = 'ativo' where id_medico = 4;
+      update medicos set em_atividade = 'inativo' where id_medico = 5;
+      update medicos set em_atividade = 'ativo' where id_medico = 6;
+      update medicos set em_atividade = 'ativo' where id_medico = 7;
+      update medicos set em_atividade = 'inativo' where id_medico = 8;
+      update medicos set em_atividade = 'ativo' where id_medico = 9;
+      update medicos set em_atividade = 'ativo' where id_medico = 10;*/
+
+/*Tabela convenio:
+
+select * from convenio;
+
+create table convenio(
+id_convenio int not null auto_increment,
+nome varchar(90),
+CNPJ int,
+tempo_carencia date,
+primary key(id_convenio)
+);
+
+insert into convenio (id_convenio, nome, CNPJ, tempo_carencia)
+values (1, 'Convenio Azul', 1934372, 50 );
+
+insert into convenio (id_convenio, nome, CNPJ, tempo_carencia)
+values (default, 'Convenio feliz', 5437974, 90),
+       (default, 'Convenio Girassol', 9743812, 5),
+       (default, 'Convenio abelha', 3128976, 30);*/
+
+/*Tabela pacientes:
+
+create table pacientes(
+id_pacientes int not null auto_increment,
+nome varchar(90),
+nascimento date,
+endereço varchar(90),
+contato int,
+email varchar(90),
+id_convenio int,
+foreign key (id_convenio) references convenio(id_convenio),
+primary key(id_pacientes)
+);
+
+select * from pacientes;
+
+insert into pacientes (id_pacientes, nome, nascimento, endereço, contato, email, id_convenio)
+values (1, 'Luis Miguel', '1996-01-12', 'Rua Mesquita', 99531784, 'luis@gmail.com', 2);
+    
+insert into pacientes (id_pacientes, nome, nascimento, endereço, contato, email, id_convenio)
+values (default, 'Maria Angela', '1999-03-04', 'Rua Tibiriça', 77914319, 'maria@hotmail.com', 3);
+    
+
+insert into pacientes (id_pacientes, nome, nascimento, endereço, contato, email, id_convenio)
+values (3, 'Nayara Gusmão', '2007-01-09', 'Rua Curupé', 99811746, 'nayara@gmail.com', 1),
+            (4, 'Otavio Oliveira', '2000-04-01', 'Rua Cajui', 44911860, 'otavio@gmail.com', 2),
+            (5, 'Pedro Pereira', '2008-09-09', 'Rua Catité', 99819086, 'pedro@hotmail.com', 4),
+            (6, 'Queila Isis', '1971-07-04', 'Rua Limão', 98176983, 'queila@hotmail.com', 2),
+            (7, 'Raissa Evelyn', '2020-01-15', 'Rua Caxtor', 88917043, 'raissa@gmail.com', 3),
+            (default, 'Sabrina Gomes', '2007-05-09', 'Rua Azul', 88916794, 'sabrina@gmail.com', 3),
+            (default, 'tereza Souza', '2006-03-03', 'Rua Gusmão', 99815990, 'tereza@hotmail.com', 1),
+            (default, 'Ulisse Costa', '1981-09-14', 'Rua Cisme', 81759032, 'ulisses@gmail.com', 2),
+            (default, 'Veronica Vera', '2010-11-15', 'Rua També', 91896438, 'veronica@gmail.com', 4),
+            (default, 'Washington Silva', '1999-01-20', 'Rua Andrade', 89176984, 'washington@gmail.com', 1),
+            (default, 'Xayane Ana', '2019-01-01', 'Rua Summer', 99184867, 'xayane@hotmail.com', 3),
+            (default, 'Yasmin Ulisses', '2020-12-01', 'Rua Black', 81674938, 'yasmin@gmail.com', 2),
+            (default, 'Zaine Silva', '1999-08-08', 'Rua Havai', 91897846, 'zaiane@hotmail.com', 4);
+            
+select pacientes.id_pacientes, pacientes.nome, pacientes.nascimento, pacientes.endereço, pacientes.contato, pacientes.email, pacientes.id_convenio, convenio.nome
+from pacientes
+inner join convenio
+on pacientes.id_convenio = convenio.id_convenio
+order by id_pacientes;*/
+
+/*Tabela categorias:
+
+create table categorias(
+id_categorias int not null auto_increment,
+generalista varchar(45),
+especialista varchar(45),
+residente varchar(45),
+primary key(id_categorias)
+);
+
+select * from categorias;
+
+insert into categorias (id_categorias, especialidade)
+	values (1, 'generalista'),
+		   (2, 'especialista'),
+		   (3, 'residente');*/
+
+/*Tabela consultas:
+
+
+
+select * from consultas;
+
+create table consultas(
+id_consultas int not null auto_increment,
+carteira int,
+valor_consulta double,
+data date,
+horario varchar(15),
+receita varchar(90),
+quantidade double,
+instruções longtext,
+id_paciente int,
+foreign key(id_paciente) references pacientes(id_pacientes),
+id_medico int,
+foreign key(id_medico) references medicos(id_medico),
+id_convenio int,
+foreign key(id_convenio) references convenio(id_convenio),
+id_categorias int,
+foreign key(id_categorias) references categorias(id_categorias),
+primary key(id_consultas)
+); 
+
+insert into consultas (id_consultas, id_paciente, id_medico, id_convenio, carteira, valor_consulta, dia, horario, receita, quantidade, instruções)
+values (1, 1, 3, 2, 888, 65.50, '2015-01-01', '12:45', 'dipirona', 0.5, 'tomar a cada 8 horas');
+
+insert into consultas (id_consultas, id_paciente, id_medico, id_convenio, carteira, valor_consulta, dia, horario, receita, quantidade, instruções, id_categorias)
+values (2, 3, 2, 1, 413, 20.0, '2022-01-01', '10:30', 'amoxilina', 0.75, 'tomar 2 vezes ao dia', 3);
+
+insert into consultas (id_consultas, id_paciente, id_medico, id_convenio, carteira, valor_consulta, dia, horario, receita, quantidade, instruções, id_categorias)
+values (3, 5, 4, 2, 765, 15.50, '2015-06-01', '13:00', 'paracetamol e revotril', 0.20, 'tomar a cada 5 horas',2),
+       (4, 7, 1, 4, 651, 10.40, '2015-09-01', '14:30', 'gastrol e dipirona', 0.10, 'tomar 3 vezes ao dia', 1),
+       (5, 9, 5, 3, 578, 15.20, '2018-01-02', '17:00', 'revotril e dipirona', 0.50, 'tomar a cada 4 horas', 3),
+       (6, 11, 6, 1, 908, 50.30, '2020-05-03', '14:00', 'dipirona e paracetamol', 0.90, 'tomar 1 vez ao dia', 2),
+       (7, 13, 8, 2, 543, 120.50, '2018-04-22', '18:00', 'gastrol', 0.15, 'tomar a cada 3 horas', 1),
+       (8, 15, 7, 3, 432, 13.60, '2019-05-05', '18:00', 'amoxilina e revotril', 0.40, 'tomar a cada 7 horas', 1),
+       (9, 2, 10, 4, 897, 75.40, '2019-12-12', '20:50', 'dipirona', 0.48, 'tomar a cada 4 horas', 3),
+       (10, 4, 9, 2, 543, 16.40, '2016-09-09', '08:50', 'diclofenaco e minizuliada', 0.50, 'tomar 5 vezes ao dia', 3),
+       (11, 6, 8, 1, 543, 40.30, '2019-07-14', '9:40', 'diclofenaco e dipirona', 0.90, 'tomar 4 vezes ao dia', 2),
+       (12, 8, 5, 1, 654, 69.60, '2018-08-08', '12;00', 'adivil e revotril', 0.50, 'tomar 2 vezes ao dia', 1),
+       (13, 10, 6, 4, 432, 50.30, '2015-12-09', '12:15', 'dorflex e amoxilina', 0.15, 'tomar a cada 4 horas', 2),
+       (14, 12, 2, 2, 555, 40.30, '2020-02-02', '17:45', 'diprinona e revotril', 0.90, 'tomar a cada 9 horas', 3),
+       (15, 14, 3, 4, 987, 20.80, '2019,08-22', '12:30', 'revotril', 0.40, 'tomar a cada 2 horas', 1),
+       (16, 1, 4, 2, 125, 30.60, '2020-09-11', '18:40', 'diclofenado', 0.25, 'tomar 5 vezes ao dia', 2),
+       (17, 5, 10, 3, 213, 75.40, '2021-12-03', '14:45', 'amoxilina', 0.50, 'tomar a cada 9 horas', 1),
+       (18, 11, 5, 3, 189, 40.30, '2021-01-16', '18:20', 'adivil', 0.30, 'tomar a cada 3 horas', 3),
+       (19, 3, 4, 1, 440, 78.40, '2016-08-04', '10:40', 'paracetamol', 0.60, 'tomar 3 vezes ao dia', 2),
+       (20, 7, 2, 2, 390, 50.40, '2021-01-05', '12:00', 'dipirona', 0.30, 'tomar a cada 4 horas', 1);
+       
+select * from consultas;
+       
+select consultas.id_consultas, consultas.carteira, consultas.valor_consulta, consultas.dia, consultas.horario, consultas.receita, consultas.quantidade, consultas.instruções, consultas.id_paciente, pacientes.nome, consultas.id_medico, medicos.nome, consultas.id_convenio, convenio.nome, consultas.id_categorias, categorias.especialidade
+from consultas 
+join pacientes
+on consultas.id_paciente = pacientes.id_pacientes
+join medicos
+on consultas.id_medico = medicos.id_medico
+join convenio
+on consultas.id_convenio = convenio.id_convenio
+join categorias
+on consultas.id_categorias = categorias.id_categorias
+order by id_consultas;
+
+Parte 2 - Crie script para excluir o último convênio cadastrado e todas as consultas realizadas com esse convênio.
+
+delete from consultas where id_convenio = 4;*/
+
+/*Tabela enfermeiro:
+
+*select * from enfermeiro;
+
+create table enfermeiro (
+id_enfermeiro int not null auto_increment,
+nome varchar(90),
+CPF int,
+CRE int,
+primary key (id_enfermeiro)
+);
+
+insert into enfermeiro (id_enfermeiro, nome, CPF, CRE)
+values (1, 'Ana Marcela', 458181038, 170982);
+
+insert into enfermeiro (id_enfermeiro, nome, CPF, CRE)
+values (default, 'Bruno Castro', 846374902, 9475639),
+	   (default, 'Camila Queiros', 593748506, 8372649),
+	   (default, 'Denis Maciel', 596032819, 8473640),
+       (default, 'Eduardo Simões', 384726744, 9323647),
+       (default, 'Fernando Braga', 509384756, 9385746),
+       (default, 'Higor Lima', 485960283, 8374950),
+       (default, 'Josemar Santos', 749503827, 9483745),
+       (default, 'Karen Moura', 495068374, 93049578),
+       (default, 'Leonardo Tozeli', 596039284, 9504932);/*
+
+/* Tabela tipo_quarto:
+
+create table tipo_quarto(
+id_tipo_quarto int not null auto_increment,
+valor_diaria double,
+descrição longtext,
+primary key(id_tipo_quarto)
+);
+
+*select * from tipo_quarto;
+
+insert into tipo_quarto (id_tipo_quarto, valor_diaria, descrição)
+values (1, 50.0, 'enfermaria'),
+       (default, 75.0, 'quartos duplos'),
+       (default, 150.0, 'apartamentos'),
+       (default, 200.0, 'apartamentos e quartos duplos');*/
+
+/*Tabela quarto:
+
+create table quarto(
+id_quarto int not null auto_increment,
+numeração int,
+tipo int,
+id_tipo_quarto int,
+foreign key(id_tipo_quarto) references tipo_quarto(id_tipo_quarto),
+primary key(id_quarto)
+);
+
+*select * from quarto;
+
+insert into quarto (id_quarto, numeração, id_tipo_quarto)
+values (1, 05, 1),
+	   (default, 10, 2),
+       (default, 15, 3),
+       (default, 20, 4);*/
+
+/*Tabela internações:
+
+create table internações(
+id_internações int not null auto_increment,
+data_de_entrada date,
+data_prevista_de_alta date,
+data_efetiva_de_alta date,
+procedimentos_realizados longtext,
+id_quarto int,
+foreign key(id_quarto) references id_quarto(id_quarto),
+tipo_quarto int,
+foreign key(tipo_quarto) references tipo_quarto(id_tipo_quarto),
+id_paciente int,
+foreign key(id_paciente) references pacientes(id_pacientes),
+id_medico int,
+foreign key(id_medico) references medicos(id_medico),
+primary key(id_internações)
+);
+
+*select * from internações;
+
+insert into  internações(id_internações, data_de_entrada, data_prevista_de_alta, data_efetiva_de_alta, procedimentos_realizados, id_quarto, id_paciente, id_medico)
+values (1, '2015-01-01', '2015-01-03', '2015-01-03', 'eletrocauterização', 2, 7, 4);
+
+insert into  internações(id_internações, data_de_entrada, data_prevista_de_alta, data_efetiva_de_alta, procedimentos_realizados, id_quarto, id_paciente, id_medico)
+values(2, '2016-04-03', '2016-04-05', '2016-04-06', 'biópsia', 1, 7, 10),
+      (3, '2020-01-15', '2020-01-16', '2020-01-16', 'endoscopia', 4, 8, 1),
+      (4, '2021-05-01', '2021-05-02', '2021-05-03', 'encefalite', 3, 9, 1),
+      (5, '2015-12-05', '2015-12-06', '2015-12-06', 'enteroscopia', 1, 8, 2),
+      (6, '2021-11-11', '2021-11-13', '2021-11-14', 'colonoscopia', 4, 10, 9),
+      (7, '2018-03-03', '2018-03-04', '2018-03-04', 'retossigmoidoscopia', 2, 12, 2);
+      
+     select * from internações;
+      
+select internações.id_internações, internações.data_de_entrada, internações.data_prevista_de_alta, internações.data_efetiva_de_alta, internações.procedimentos_realizados, internações.id_quarto, internações.tipo_quarto, tipo_quarto.descrição,internações.id_paciente, pacientes.nome, internações.id_medico, medicos.nome
+from internações
+join tipo_quarto
+on internações.tipo_quarto = id_tipo_quarto
+join pacientes
+on internações.id_paciente = id_pacientes
+join medicos
+on internações.id_medico = medicos.id_medico
+order by id_internações;
+
+Parte 2 - Crie script para atualizar as datas de alta nas internações em quartos de enfermaria para três dias após a entrada.
+
+update internações set data_efetiva_de_alta = '2015-01-04' where id_internações = 1;
+
+update internações set data_efetiva_de_alta = '2015-12-08' where id_internações = 5;*/
+
+
+
+
+
+
+
+
+
+
